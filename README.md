@@ -5,39 +5,39 @@
   <img src="https://img.shields.io/badge/Interview-Must_Know-critical?style=for-the-badge" alt="Interview"/>
 </p>
 
-# 📡 SPI Master Controller — Verilog HDL
+# ðŸ“¡ SPI Master Controller â€” Verilog HDL
 
-> A fully configurable, synthesizable SPI Master controller supporting all 4 SPI modes, multi-slave selection, parameterized clock divider, and MSB/LSB-first transmission — a must-have VLSI IP core for your portfolio.
+> A fully configurable, synthesizable SPI Master controller supporting all 4 SPI modes, multi-slave selection, parameterized clock divider, and MSB/LSB-first transmission â€” a must-have VLSI IP core for your portfolio.
 
 ---
 
-## 🔍 Overview
+## ðŸ” Overview
 
 **SPI (Serial Peripheral Interface)** is one of the most widely used bus protocols in embedded and SoC designs. This project implements a **production-quality SPI Master** with all the features asked about in VLSI design interviews.
 
 ### Key Highlights
-- 📡 **All 4 SPI Modes** — CPOL/CPHA combinations (Mode 0-3)
-- 🔧 **Parameterized** — Configurable data width, clock divider, slave count
-- 🎯 **Multi-Slave** — Up to 4 slaves with individual chip-select
-- 🔄 **Bit Order** — MSB-first and LSB-first support
-- ✅ **Loopback Testbench** — MOSI→MISO self-verification (12 test vectors)
-- 📊 **VCD Waveform** — Full protocol timing visualization
-- 🏭 **Synthesizable** — Ready for FPGA/ASIC implementation
+- ðŸ“¡ **All 4 SPI Modes** â€” CPOL/CPHA combinations (Mode 0-3)
+- ðŸ”§ **Parameterized** â€” Configurable data width, clock divider, slave count
+- ðŸŽ¯ **Multi-Slave** â€” Up to 4 slaves with individual chip-select
+- ðŸ”„ **Bit Order** â€” MSB-first and LSB-first support
+- âœ… **Loopback Testbench** â€” MOSIâ†’MISO self-verification (12 test vectors)
+- ðŸ“Š **VCD Waveform** â€” Full protocol timing visualization
+- ðŸ­ **Synthesizable** â€” Ready for FPGA/ASIC implementation
 
 ---
 
-## 📶 SPI Protocol
+## ðŸ“¶ SPI Protocol
 
 ```
-         ┌───── Transaction ──────────────────────────┐
-CS_n  ───┘                                            └───
+         â”Œâ”€â”€â”€â”€â”€ Transaction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+CS_n  â”€â”€â”€â”˜                                            â””â”€â”€â”€
                                                         
-SCLK     ─────┐  ┌──┐  ┌──┐  ┌──┐  ┌──┐  ┌──┐  ┌──┐  ┌──
-(Mode 0)      └──┘  └──┘  └──┘  └──┘  └──┘  └──┘  └──┘
+SCLK     â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”  â”Œâ”€â”€â”  â”Œâ”€â”€â”  â”Œâ”€â”€â”  â”Œâ”€â”€â”  â”Œâ”€â”€â”  â”Œâ”€â”€
+(Mode 0)      â””â”€â”€â”˜  â””â”€â”€â”˜  â””â”€â”€â”˜  â””â”€â”€â”˜  â””â”€â”€â”˜  â””â”€â”€â”˜  â””â”€â”€â”˜
 
-MOSI     ──╳──D7──╳──D6──╳──D5──╳──D4──╳──D3──╳──D2──╳──D1──╳──D0──
-MISO     ──╳──D7──╳──D6──╳──D5──╳──D4──╳──D3──╳──D2──╳──D1──╳──D0──
-                ↑     ↑     ↑     ↑     ↑     ↑     ↑     ↑
+MOSI     â”€â”€â•³â”€â”€D7â”€â”€â•³â”€â”€D6â”€â”€â•³â”€â”€D5â”€â”€â•³â”€â”€D4â”€â”€â•³â”€â”€D3â”€â”€â•³â”€â”€D2â”€â”€â•³â”€â”€D1â”€â”€â•³â”€â”€D0â”€â”€
+MISO     â”€â”€â•³â”€â”€D7â”€â”€â•³â”€â”€D6â”€â”€â•³â”€â”€D5â”€â”€â•³â”€â”€D4â”€â”€â•³â”€â”€D3â”€â”€â•³â”€â”€D2â”€â”€â•³â”€â”€D1â”€â”€â•³â”€â”€D0â”€â”€
+                â†‘     â†‘     â†‘     â†‘     â†‘     â†‘     â†‘     â†‘
              Sample points (Mode 0: rising edge)
 ```
 
@@ -45,40 +45,40 @@ MISO     ──╳──D7──╳──D6──╳──D5──╳──D4─
 
 | Mode | CPOL | CPHA | Clock Idle | Sample Edge | Shift Edge |
 |:----:|:----:|:----:|:----------:|:-----------:|:----------:|
-| 0 | 0 | 0 | LOW | Rising ↑ | Falling ↓ |
-| 1 | 0 | 1 | LOW | Falling ↓ | Rising ↑ |
-| 2 | 1 | 0 | HIGH | Falling ↓ | Rising ↑ |
-| 3 | 1 | 1 | HIGH | Rising ↑ | Falling ↓ |
+| 0 | 0 | 0 | LOW | Rising â†‘ | Falling â†“ |
+| 1 | 0 | 1 | LOW | Falling â†“ | Rising â†‘ |
+| 2 | 1 | 0 | HIGH | Falling â†“ | Rising â†‘ |
+| 3 | 1 | 1 | HIGH | Rising â†‘ | Falling â†“ |
 
 ---
 
-## ⚙️ Parameters
+## âš™ï¸ Parameters
 
 | Parameter | Default | Description |
 |:---------:|:-------:|:------------|
 | `DATA_WIDTH` | 8 | Transaction width (bits) |
-| `CLK_DIV` | 4 | SCLK = sys_clk / (2×CLK_DIV) |
+| `CLK_DIV` | 4 | SCLK = sys_clk / (2Ã—CLK_DIV) |
 | `NUM_SLAVES` | 4 | Number of slave devices |
 
 ---
 
-## 📁 File Structure
+## ðŸ“ File Structure
 
 ```
 VLSI-SPI-Master-Controller/
-├── src/
-│   └── spi_master.v          # SPI Master module
-├── testbench/
-│   └── spi_master_tb.v       # Loopback testbench
-├── docs/
-├── .gitignore
-├── LICENSE
-└── README.md
+â”œâ”€â”€ src/
+â”‚   â””â”€â”€ spi_master.v          # SPI Master module
+â”œâ”€â”€ testbench/
+â”‚   â””â”€â”€ spi_master_tb.v       # Loopback testbench
+â”œâ”€â”€ docs/
+â”œâ”€â”€ .gitignore
+â”œâ”€â”€ LICENSE
+â””â”€â”€ README.md
 ```
 
 ---
 
-## 🚀 Simulation Guide
+## ðŸš€ Simulation Guide
 
 ```bash
 iverilog -o spi_sim src/spi_master.v testbench/spi_master_tb.v
@@ -88,22 +88,22 @@ gtkwave spi_master_tb.vcd
 
 ---
 
-## 💡 Applications
+## ðŸ’¡ Applications
 
-- 🔌 **SoC Peripherals** — ADC, DAC, Flash, EEPROM communication
-- 📡 **FPGA-to-Sensor** — SPI sensor interfacing (accelerometers, displays)
-- 🏭 **ASIC IP Core** — Reusable bus interface for chip design
-- 🔧 **Debug Interface** — JTAG/SPI debug probes
+- ðŸ”Œ **SoC Peripherals** â€” ADC, DAC, Flash, EEPROM communication
+- ðŸ“¡ **FPGA-to-Sensor** â€” SPI sensor interfacing (accelerometers, displays)
+- ðŸ­ **ASIC IP Core** â€” Reusable bus interface for chip design
+- ðŸ”§ **Debug Interface** â€” JTAG/SPI debug probes
 
 ---
 
-## 👨‍💻 Author
+## ðŸ‘¨â€ðŸ’» Author
 
-**Daggolu Hari Krishna** — B.Tech ECE | JNTUA College of Engineering, Kalikiri
+**Daggolu Hari Krishna** â€” B.Tech ECE | JNTUA College of Engineering, Kalikiri
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/harikrishnadaggolu)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/contacthari88/)
 [![GitHub](https://img.shields.io/badge/GitHub-HariKrishna0088-black?style=flat-square&logo=github)](https://github.com/HariKrishna0088)
 
 ---
 
-<p align="center">⭐ Star this repo if you found it useful! ⭐</p>
+<p align="center">â­ Star this repo if you found it useful! â­</p>
